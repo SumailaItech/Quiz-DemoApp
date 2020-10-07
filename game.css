@@ -36,7 +36,7 @@
 /* hud */
 #hud{
     display: flex;
-    justify-content:space-between;
+    justify-content:space-around;
 }
 .hud-prefix{
     text-align: center;
