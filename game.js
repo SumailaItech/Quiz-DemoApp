@@ -3,6 +3,8 @@ const choices = Array.from(document.getElementsByClassName("choice-text"));
 const progressBarText = document.getElementById('progressText');
 const scoreText = document.getElementById('score');
 const progressBarFull = document.getElementById('progressBarFull');
+const loader =document.getElementById('loader');
+const game = document.getElementById('game')
 
 let currentQuestion = {};
 let acceptingAnswer = false;
@@ -30,8 +32,9 @@ fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=mul
         answerChoices.forEach((choice, index) => {
             formatterdQuestion["choice" +(index +1)] = choice;
         });
-return formatterdQuestion;
+    return formatterdQuestion;
     });
+   
     startGame();
 }).catch(err =>{
     console.error(err);
@@ -47,6 +50,8 @@ startGame = ()=>{
     availableQuestions = [...questions];
     
     getNewQuestion();
+    game.classList.remove("hidden");
+    loader.classList.add("hidden");
 };
 
 getNewQuestion = ()=>{
