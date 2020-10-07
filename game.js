@@ -18,16 +18,21 @@ fetch("https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=mul
 }).then(loadedQuestions =>{
     //questions = loadedQuestions;
     console.log(loadedQuestions.results);
-    loadedQuestions.results.map( loadedQuestion =>{
+   questions = loadedQuestions.results.map( loadedQuestion =>{
         const formatterdQuestion ={
-            question:loadedQuestion.questions
+            question:loadedQuestion.question
         };
 
-        const answerChoices =[...loadedQuestion.incorrect];
-        formatterdQuestion.answer = Math.floor(Math.random()*3) +1;
+        const answerChoices =[...loadedQuestion.incorrect_answers];
+        formatterdQuestion.answer = Math.floor(Math.random() *3 ) +1;
+        answerChoices.slice(formatterdQuestion.answer -1,0, loadedQuestion.correct_answer);
 
+        answerChoices.forEach((choice, index) => {
+            formatterdQuestion["choice" +(index +1)] = choice;
+        });
+return formatterdQuestion;
     });
-    //startGame();
+    startGame();
 }).catch(err =>{
     console.error(err);
 })
